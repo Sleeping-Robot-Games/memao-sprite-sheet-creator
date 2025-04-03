@@ -298,4 +298,4 @@ func export_sheet():
 
 
 func _on_texture_button_pressed() -> void:
-	$ScrollContainer/PanelContainer/VBoxContainer/Section/Selections.visible = !$ScrollContainer/PanelContainer/VBoxContainer/Section/Selections.visible
+	pass
