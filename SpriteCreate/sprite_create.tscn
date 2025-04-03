@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgpa540vv560k"]
+
+[ext_resource type="Script" uid="uid://dcw2vi1hcypja" path="res://SpriteCreate/sprite_create.gd" id="1_5ealw"]
+[ext_resource type="Texture2D" uid="uid://dgef8c7ared1j" path="res://Assets/Ui/BGs/Bg_002.png" id="1_ls05x"]
+[ext_resource type="PackedScene" uid="uid://dx6pcfu1ca8vo" path="res://Shared/task_bar.tscn" id="2_yrjhp"]
+[ext_resource type="PackedScene" uid="uid://bxc4l6ko7ylhh" path="res://character_sprites/character_sprites.tscn" id="3_3w578"]
+
+[node name="SpriteCreate" type="Node2D"]
+script = ExtResource("1_5ealw")
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(480, 306)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_ls05x")
+
+[node name="TaskBar" parent="." instance=ExtResource("2_yrjhp")]
+
+[node name="CharacterSprites" parent="." instance=ExtResource("3_3w578")]
+position = Vector2(163, 260)
+scale = Vector2(6, 6)

@@ -15,11 +15,16 @@ run/main_scene="uid://th8mxu403ben"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://ci1rw77uwd3ge"
 
+[autoload]
+
+g="*res://global.gd"
+
 [display]
 
 window/size/viewport_width=960
 window/size/viewport_height=540
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://catagal5ode3g"
 
 [rendering]
 

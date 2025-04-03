@@ -1,28 +1,30 @@
-[gd_scene load_steps=17 format=3 uid="uid://th8mxu403ben"]
+[gd_scene load_steps=18 format=3 uid="uid://th8mxu403ben"]
 
-[ext_resource type="Texture2D" uid="uid://bx8l7blkigobw" path="res://Assets/Ui/Bg_001.png" id="1_2o7e7"]
+[ext_resource type="Texture2D" uid="uid://bx8l7blkigobw" path="res://Assets/Ui/BGs/Bg_001.png" id="1_2o7e7"]
+[ext_resource type="Script" uid="uid://d0u18u8u0swa0" path="res://Destop/desktop.gd" id="1_at3bx"]
 [ext_resource type="Texture2D" uid="uid://w0s8cfu2peh3" path="res://Assets/Ui/title.png" id="2_n3oym"]
-[ext_resource type="Texture2D" uid="uid://dirnmtkwpichr" path="res://Assets/Ui/palette.png" id="3_luyhk"]
-[ext_resource type="Texture2D" uid="uid://2f41tli5nwy6" path="res://Assets/Ui/palettepressed.png" id="4_s60fb"]
-[ext_resource type="Texture2D" uid="uid://xqr5g2vjth0x" path="res://Assets/Ui/palettehover.png" id="5_mwfc7"]
-[ext_resource type="Texture2D" uid="uid://6h37n5t0knrk" path="res://Assets/Ui/paletteshadow.png" id="7_luyhk"]
+[ext_resource type="Texture2D" uid="uid://dirnmtkwpichr" path="res://Assets/Ui/HomeIcons/palette.png" id="3_luyhk"]
+[ext_resource type="Texture2D" uid="uid://2f41tli5nwy6" path="res://Assets/Ui/HomeIcons/palettepressed.png" id="4_s60fb"]
+[ext_resource type="Texture2D" uid="uid://xqr5g2vjth0x" path="res://Assets/Ui/HomeIcons/palettehover.png" id="5_mwfc7"]
+[ext_resource type="Texture2D" uid="uid://6h37n5t0knrk" path="res://Assets/Ui/HomeIcons/paletteshadow.png" id="7_luyhk"]
 [ext_resource type="FontFile" uid="uid://crm05a4pa7bdm" path="res://Assets/Ui/font.tres" id="8_s60fb"]
-[ext_resource type="Texture2D" uid="uid://cbef3pg2gtgeb" path="res://Assets/Ui/folder.png" id="9_svpcn"]
-[ext_resource type="Texture2D" uid="uid://d1bweab5bhwlv" path="res://Assets/Ui/folderpressed.png" id="10_cb3sl"]
-[ext_resource type="Texture2D" uid="uid://b2otdp4vlhn65" path="res://Assets/Ui/folderhover.png" id="11_syo7x"]
-[ext_resource type="Texture2D" uid="uid://c1qqae2n3nlmn" path="res://Assets/Ui/magnifying.png" id="13_68f0b"]
-[ext_resource type="Texture2D" uid="uid://d3frxed8trf8f" path="res://Assets/Ui/foldershadow.png" id="13_at3bx"]
-[ext_resource type="Texture2D" uid="uid://b5ybkhfahtplx" path="res://Assets/Ui/magnifyingpressed.png" id="14_7blkh"]
-[ext_resource type="Texture2D" uid="uid://j40p3s4pgjsj" path="res://Assets/Ui/magnifyinghover.png" id="15_eet1m"]
-[ext_resource type="PackedScene" uid="uid://dx6pcfu1ca8vo" path="res://SharedUI/task_bar.tscn" id="16_mwi2b"]
-[ext_resource type="Texture2D" uid="uid://cgdstbe6lmqfm" path="res://Assets/Ui/magnifyingshadow.png" id="17_o8t42"]
+[ext_resource type="Texture2D" uid="uid://cbef3pg2gtgeb" path="res://Assets/Ui/HomeIcons/folder.png" id="9_svpcn"]
+[ext_resource type="Texture2D" uid="uid://d1bweab5bhwlv" path="res://Assets/Ui/HomeIcons/folderpressed.png" id="10_cb3sl"]
+[ext_resource type="Texture2D" uid="uid://b2otdp4vlhn65" path="res://Assets/Ui/HomeIcons/folderhover.png" id="11_syo7x"]
+[ext_resource type="Texture2D" uid="uid://c1qqae2n3nlmn" path="res://Assets/Ui/HomeIcons/magnifying.png" id="13_68f0b"]
+[ext_resource type="Texture2D" uid="uid://d3frxed8trf8f" path="res://Assets/Ui/HomeIcons/foldershadow.png" id="13_at3bx"]
+[ext_resource type="Texture2D" uid="uid://b5ybkhfahtplx" path="res://Assets/Ui/HomeIcons/magnifyingpressed.png" id="14_7blkh"]
+[ext_resource type="Texture2D" uid="uid://j40p3s4pgjsj" path="res://Assets/Ui/HomeIcons/magnifyinghover.png" id="15_eet1m"]
+[ext_resource type="PackedScene" uid="uid://dx6pcfu1ca8vo" path="res://Shared/task_bar.tscn" id="16_mwi2b"]
+[ext_resource type="Texture2D" uid="uid://cgdstbe6lmqfm" path="res://Assets/Ui/HomeIcons/magnifyingshadow.png" id="17_o8t42"]
 
 [node name="Desktop" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_at3bx")
 
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(483, 328)
-scale = Vector2(1.6, 1.6)
+position = Vector2(480, 306)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_2o7e7")
 
 [node name="Title" type="Sprite2D" parent="."]
@@ -41,6 +43,7 @@ layout_mode = 2
 
 [node name="Btn" type="TextureButton" parent="IconContainer/Create"]
 z_index = 1
+layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 scale = Vector2(3, 3)
@@ -76,6 +79,7 @@ layout_mode = 2
 
 [node name="Btn" type="TextureButton" parent="IconContainer/List"]
 z_index = 1
+layout_mode = 0
 offset_left = -48.0
 offset_right = -16.0
 offset_bottom = 16.0
@@ -112,6 +116,7 @@ layout_mode = 2
 
 [node name="Btn" type="TextureButton" parent="IconContainer/WindowChange"]
 z_index = 1
+layout_mode = 0
 offset_left = -1.0
 offset_right = 15.0
 offset_bottom = 16.0

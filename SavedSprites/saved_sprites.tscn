@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://2xiclv2muaq5"]
+
+[ext_resource type="Texture2D" uid="uid://cud17olqwe2us" path="res://Assets/Ui/BGs/Bg_003.png" id="1_c0d13"]
+[ext_resource type="FontFile" uid="uid://crm05a4pa7bdm" path="res://Assets/Ui/font.tres" id="2_cmxqa"]
+[ext_resource type="PackedScene" uid="uid://dx6pcfu1ca8vo" path="res://Shared/task_bar.tscn" id="3_oxxya"]
+[ext_resource type="PackedScene" uid="uid://2sod3vhqwp7t" path="res://SavedSprites/sprite_list_item.tscn" id="4_k2eis"]
+[ext_resource type="PackedScene" uid="uid://bxc4l6ko7ylhh" path="res://character_sprites/character_sprites.tscn" id="5_lw2e3"]
+
+[node name="SavedSprites" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(480, 306)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_c0d13")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 370.0
+offset_top = 20.0
+offset_right = 554.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_cmxqa")
+theme_override_font_sizes/font_size = 48
+text = "Saved Sprites"
+
+[node name="TaskBar" parent="." instance=ExtResource("3_oxxya")]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 364.0
+offset_top = 135.0
+offset_right = 570.0
+offset_bottom = 441.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="SpriteListItem" parent="ScrollContainer/VBoxContainer" instance=ExtResource("4_k2eis")]
+layout_mode = 2
+
+[node name="CharacterSprites" parent="." instance=ExtResource("5_lw2e3")]
+position = Vector2(182, 261)
+scale = Vector2(6, 6)

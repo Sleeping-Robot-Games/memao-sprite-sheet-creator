@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://2sod3vhqwp7t"]
+
+[ext_resource type="FontFile" uid="uid://crm05a4pa7bdm" path="res://Assets/Ui/font.tres" id="1_eqx5p"]
+
+[node name="SpriteListItem" type="HBoxContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_eqx5p")
+theme_override_font_sizes/font_size = 20
+text = "Name"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Export"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 2
+text = "Edit"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 2
+text = "Delete"
