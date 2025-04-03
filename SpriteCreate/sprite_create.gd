@@ -295,3 +295,7 @@ func export_sheet():
 	add_child(s_g)
 	s_g.create_spritesheet(state)
 	s_g.export_spritesheet()
+
+
+func _on_texture_button_pressed() -> void:
+	$ScrollContainer/PanelContainer/VBoxContainer/Section/Selections.visible = !$ScrollContainer/PanelContainer/VBoxContainer/Section/Selections.visible
