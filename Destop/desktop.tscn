@@ -1,0 +1,146 @@
+[gd_scene load_steps=17 format=3 uid="uid://th8mxu403ben"]
+
+[ext_resource type="Texture2D" uid="uid://bx8l7blkigobw" path="res://Assets/Ui/Bg_001.png" id="1_2o7e7"]
+[ext_resource type="Texture2D" uid="uid://w0s8cfu2peh3" path="res://Assets/Ui/title.png" id="2_n3oym"]
+[ext_resource type="Texture2D" uid="uid://dirnmtkwpichr" path="res://Assets/Ui/palette.png" id="3_luyhk"]
+[ext_resource type="Texture2D" uid="uid://2f41tli5nwy6" path="res://Assets/Ui/palettepressed.png" id="4_s60fb"]
+[ext_resource type="Texture2D" uid="uid://xqr5g2vjth0x" path="res://Assets/Ui/palettehover.png" id="5_mwfc7"]
+[ext_resource type="Texture2D" uid="uid://6h37n5t0knrk" path="res://Assets/Ui/paletteshadow.png" id="7_luyhk"]
+[ext_resource type="FontFile" uid="uid://crm05a4pa7bdm" path="res://Assets/Ui/font.tres" id="8_s60fb"]
+[ext_resource type="Texture2D" uid="uid://cbef3pg2gtgeb" path="res://Assets/Ui/folder.png" id="9_svpcn"]
+[ext_resource type="Texture2D" uid="uid://d1bweab5bhwlv" path="res://Assets/Ui/folderpressed.png" id="10_cb3sl"]
+[ext_resource type="Texture2D" uid="uid://b2otdp4vlhn65" path="res://Assets/Ui/folderhover.png" id="11_syo7x"]
+[ext_resource type="Texture2D" uid="uid://c1qqae2n3nlmn" path="res://Assets/Ui/magnifying.png" id="13_68f0b"]
+[ext_resource type="Texture2D" uid="uid://d3frxed8trf8f" path="res://Assets/Ui/foldershadow.png" id="13_at3bx"]
+[ext_resource type="Texture2D" uid="uid://b5ybkhfahtplx" path="res://Assets/Ui/magnifyingpressed.png" id="14_7blkh"]
+[ext_resource type="Texture2D" uid="uid://j40p3s4pgjsj" path="res://Assets/Ui/magnifyinghover.png" id="15_eet1m"]
+[ext_resource type="PackedScene" uid="uid://dx6pcfu1ca8vo" path="res://SharedUI/task_bar.tscn" id="16_mwi2b"]
+[ext_resource type="Texture2D" uid="uid://cgdstbe6lmqfm" path="res://Assets/Ui/magnifyingshadow.png" id="17_o8t42"]
+
+[node name="Desktop" type="Node2D"]
+texture_filter = 1
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(483, 328)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("1_2o7e7")
+
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(513, 145)
+texture = ExtResource("2_n3oym")
+
+[node name="IconContainer" type="VBoxContainer" parent="."]
+offset_left = 74.0
+offset_top = 125.0
+offset_right = 138.0
+offset_bottom = 409.0
+theme_override_constants/separation = 100
+
+[node name="Create" type="Control" parent="IconContainer"]
+layout_mode = 2
+
+[node name="Btn" type="TextureButton" parent="IconContainer/Create"]
+z_index = 1
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("3_luyhk")
+texture_pressed = ExtResource("4_s60fb")
+texture_hover = ExtResource("5_mwfc7")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="IconContainer/Create"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 21.0
+offset_bottom = 22.0
+scale = Vector2(3, 3)
+mouse_filter = 2
+texture = ExtResource("7_luyhk")
+
+[node name="Label" type="Label" parent="IconContainer/Create"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 58.0
+offset_right = 59.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.196078)
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("8_s60fb")
+text = "Create Sprite"
+
+[node name="List" type="Control" parent="IconContainer"]
+layout_mode = 2
+
+[node name="Btn" type="TextureButton" parent="IconContainer/List"]
+z_index = 1
+offset_left = -48.0
+offset_right = -16.0
+offset_bottom = 16.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("9_svpcn")
+texture_pressed = ExtResource("10_cb3sl")
+texture_hover = ExtResource("11_syo7x")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="IconContainer/List"]
+layout_mode = 0
+offset_left = -41.0
+offset_top = 6.0
+offset_right = -9.0
+offset_bottom = 22.0
+scale = Vector2(3, 3)
+mouse_filter = 2
+texture = ExtResource("13_at3bx")
+
+[node name="Label" type="Label" parent="IconContainer/List"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 58.0
+offset_right = 63.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.196078)
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("8_s60fb")
+text = "Saved Sprites"
+
+[node name="WindowChange" type="Control" parent="IconContainer"]
+layout_mode = 2
+
+[node name="Btn" type="TextureButton" parent="IconContainer/WindowChange"]
+z_index = 1
+offset_left = -1.0
+offset_right = 15.0
+offset_bottom = 16.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("13_68f0b")
+texture_pressed = ExtResource("14_7blkh")
+texture_hover = ExtResource("15_eet1m")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="IconContainer/WindowChange"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 4.0
+offset_right = 13.0
+offset_bottom = 20.0
+scale = Vector2(3, 3)
+mouse_filter = 2
+texture = ExtResource("17_o8t42")
+
+[node name="Label" type="Label" parent="IconContainer/WindowChange"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 58.0
+offset_right = 59.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.196078)
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("8_s60fb")
+text = "Fullscreen"
+
+[node name="TaskBar" parent="." instance=ExtResource("16_mwi2b")]
