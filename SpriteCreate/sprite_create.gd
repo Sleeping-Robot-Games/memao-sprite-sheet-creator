@@ -1,7 +1,5 @@
 extends Node2D
 
-var rng = RandomNumberGenerator.new()
-
 @export var accessory_A_chance = 10
 @export var accessory_B_chance = 10
 @export var accessory_C_chance = 10
@@ -71,8 +69,6 @@ var rng = RandomNumberGenerator.new()
 	]
 }
 
-# TODO: Let's just instance the generator when needed
-@onready var sprite_generator = get_parent().get_node("Generator")
 
 var palette_sprite_state: Dictionary
 var sprite_state: Dictionary = {
@@ -98,6 +94,8 @@ var sprite_state: Dictionary = {
 
 var player_name: String
 
+var sprite_generator = preload("res://Generator/generator.tscn")
+
 var sprite_folder_path = "res://Assets/Character/16x32/"
 var palette_folder_path = "res://Assets/Palettes"
 
@@ -110,17 +108,13 @@ func _ready():
 	#$TabContainer/Top/TopTabRandom.connect('button_up', self, '_on_Random_Tab_button_up', [['JacketA', 'JacketB', 'TopA', 'TopB'],['Jacket', 'Top']])
 	#$TabContainer/Bottom/BottomTabRandom.connect('button_up', self, '_on_Random_Tab_button_up', [['BottomA', 'BottomB', 'Shoes'], ['Bottom', 'Shoe']])
 	create_random_character()
-	$PlayerSprites/AnimationPlayer.play("idle_front")
+	$CharacterSprites/AnimationPlayer.play("idle_front")
 	
 func _process(delta):
 	pass
 	
 func load_character_from_save():
 	pass
-
-func update_sheet_preview():
-	var state = {'sprite_state': sprite_state, 'palette_state': palette_sprite_state}
-	sprite_generator.create_spritesheet(state, $Preview)
 
 func set_sprite_texture(sprite_name: String, texture_path: String) -> void:
 	player_sprite[sprite_name].set_texture(load(texture_path))
@@ -141,7 +135,7 @@ func random_asset(folder: String, keyword: String = "") -> String:
 
 func random_color(color_rows: int) -> int:
 	randomize()
-	return rng.randi_range(1, color_rows)
+	return randi_range(1, color_rows)
 	
 func set_random_color(palette_type: String) -> void:
 	var palette = load(palette_folder_path+"/"+palette_type+"/palette.png")
@@ -165,7 +159,7 @@ func set_random_texture(sprite_name: String) -> void:
 		files = filtered_files
 
 	# If there are no usable files, fallback is handled elsewhere
-	if files.empty():
+	if files.is_empty():
 		return
 
 	randomize()
@@ -187,14 +181,14 @@ func create_random_character() -> void:
 	var palette_folders = g.folders_in_dir(palette_folder_path)
 
 	for folder in sprite_folders:
-		rng.randomize()
+		randomize()
 
 		var folder_path = sprite_folder_path + folder + "/"
 		var zero_sprite_path = folder_path + folder.to_lower() + "_000.png"
 
 		# Apply _000 version if sprite is excluded based on chance
 		if sprite_chances.has(folder):
-			if rng.randi() % 100 >= sprite_chances[folder]:
+			if randi() % 100 >= sprite_chances[folder]:
 				if ResourceLoader.exists(zero_sprite_path):
 					set_sprite_texture(folder, zero_sprite_path)
 				continue
@@ -209,8 +203,6 @@ func create_random_character() -> void:
 
 	for folder in palette_folders:
 		set_random_color(folder)
-
-	update_sheet_preview()
 
 func ensure_jacket_state():
 	if not '000' in sprite_state['JacketB']:
@@ -238,7 +230,7 @@ func _on_Turn_button_up(direction):
 	current_animation += direction
 	if current_animation == 4 or current_animation == -4:
 		current_animation = 0
-	$PlayerSprites/AnimationPlayer.play(animations[current_animation])
+	$CharacterSprites/AnimationPlayer.play(animations[current_animation])
 	
 func _on_Sprite_Selection_button_up(direction: int, sprite: String):
 	var folder_path = sprite_folder_path+sprite+"/"
@@ -253,8 +245,7 @@ func _on_Sprite_Selection_button_up(direction: int, sprite: String):
 	var new_sprite_path = folder_path + files[new_index]
 	print(new_sprite_path)
 	set_sprite_texture(sprite, new_sprite_path)
-	
-	update_sheet_preview()
+
 
 func _on_Color_Selection_button_up(direction: int, palette_sprite: String):
 	var palette = load("res://Assets/Palettes/"+palette_sprite+"/palette.png")
@@ -269,7 +260,6 @@ func _on_Color_Selection_button_up(direction: int, palette_sprite: String):
 		g.set_sprite_color(sprite, palette, color_num, color_rows)
 		palette_sprite_state[palette_sprite] = color_num
 		
-	update_sheet_preview()
 
 func _on_Save_button_up():
 	var player_name = $TabContainer/Character/NameLabel/Name.text
@@ -299,7 +289,9 @@ func _on_Random_Tab_button_up(sprites, palettes):
 	for palette in palettes:
 		set_random_color(str(palette))
 
-func _on_Export_button_up():
+func export_sheet():
 	var state = {'sprite_state': sprite_state, 'palette_state': palette_sprite_state}
-	sprite_generator.create_spritesheet(state)
-	sprite_generator.export_spritesheet()
+	var s_g = sprite_generator.instantiate()
+	add_child(s_g)
+	s_g.create_spritesheet(state)
+	s_g.export_spritesheet()

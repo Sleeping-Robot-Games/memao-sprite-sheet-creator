@@ -1,6 +1,6 @@
 extends Node2D
 
-const CHARACTER_SPRITES_SCENE = preload("res://CharacterSprites/CharacterSprites.tscn")
+const CHARACTER_SPRITES_SCENE = preload("res://character_sprites/character_sprites.tscn")
 
 # The grid dimensions
 @export var rows = 8
@@ -19,10 +19,12 @@ var frame_directions = [
 ]
 
 func _ready():
-	pass
+	$SubViewportContainer/SubViewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	$SubViewportContainer/SubViewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
+
 
 func create_spritesheet(state, parent = null):
-	var target = parent if parent else $ViewportContainer/Viewport
+	var target = parent if parent else $SubViewportContainer/SubViewport
 	for frame in target.get_children():
 		frame.queue_free()
 		
@@ -40,7 +42,7 @@ func create_spritesheet(state, parent = null):
 		var direction = frame_directions[direction_index]
 
 		# Create the sprite scene
-		var frame_instance = CHARACTER_SPRITES_SCENE.instance()
+		var frame_instance = CHARACTER_SPRITES_SCENE.instantiate()
 
 		# Pass a unique frame index (i), the total vframes/hframes, and a direction
 		frame_instance.init(
@@ -60,24 +62,22 @@ func create_spritesheet(state, parent = null):
 			parent.add_child(frame_instance)
 		else:
 			# Add it to the viewport for rendering
-			$ViewportContainer/Viewport.add_child(frame_instance)
+			$SubViewportContainer/SubViewport.add_child(frame_instance)
 			
 		# Apply the sprite_state
 		frame_instance.create_character(state)
 
 
 func export_spritesheet():
-	show()
+	await save_img()
 	
-	# Start a short timer to allow the viewport to render before capturing
-	await get_tree().create_timer(.5)
-	
-	save_img()
+	queue_free()
 
 func save_img():
-	var image = $ViewportContainer/Viewport.get_texture().get_data()
+	await RenderingServer.frame_post_draw  # Ensures the viewport is fully rendered
+
+	var image = $SubViewportContainer/SubViewport.get_texture().get_image()
 	image.convert(Image.FORMAT_RGBA8)
-	image.flip_y()
 
 	var file_name = "spritesheet_%s.png" % str(Time.get_ticks_msec())
 	var file_path = "user://%s" % file_name

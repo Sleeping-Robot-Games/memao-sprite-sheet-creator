@@ -119,10 +119,10 @@ func get_palette_name_from_sprite(sprite: Sprite2D) -> String:
 	return reverse_palette_dictionary.get(sprite.name, "")
 
 func set_sprite_color(sprite: Sprite2D, palette: Texture2D, number: int, rows: int) -> void:
+	make_shaders_unique(sprite)
 	sprite.material.set_shader_parameter("palette", palette)
 	sprite.material.set_shader_parameter("color_row", number)
 	sprite.material.set_shader_parameter("total_rows", rows)
-	make_shaders_unique(sprite)
 
 func make_shaders_unique(sprite: Sprite2D):
 	var mat = sprite.material.duplicate()

@@ -15,7 +15,7 @@ func init(_frame, _vframes, _hframes, _direction):
 
 func _ready():
 	# Load the Z-index library once this node is on the tree
-	z_index_library = load_json("res://Resources/JSON/z_index_player_library.json")
+	z_index_library = load_json("res://character_sprites/z_index_player_library.json")
 
 	# For each sprite (child) in SpriteHolder, set frames & tile counts
 	for sprite in $SpriteHolder.get_children():

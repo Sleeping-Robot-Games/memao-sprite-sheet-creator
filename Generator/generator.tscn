@@ -6,8 +6,10 @@
 script = ExtResource("1_8emip")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 384.0
-offset_bottom = 384.0
+offset_left = -412.0
+offset_top = 23.0
+offset_right = -28.0
+offset_bottom = 407.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]

@@ -149,3 +149,7 @@ theme_override_fonts/font = ExtResource("8_s60fb")
 text = "Fullscreen"
 
 [node name="TaskBar" parent="." instance=ExtResource("16_mwi2b")]
+
+[connection signal="pressed" from="IconContainer/Create/Btn" to="." method="_on_create_btn_pressed"]
+[connection signal="pressed" from="IconContainer/List/Btn" to="." method="_on_list_btn_pressed"]
+[connection signal="pressed" from="IconContainer/WindowChange/Btn" to="." method="_on_window_btn_pressed"]

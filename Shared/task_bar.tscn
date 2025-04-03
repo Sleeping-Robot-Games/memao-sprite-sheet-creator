@@ -39,3 +39,29 @@ stretch_mode = 3
 layout_mode = 2
 texture = ExtResource("4_4q170")
 stretch_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 1.0
+offset_right = 250.0
+offset_bottom = 27.0
+
+[node name="Back" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Back"
+
+[node name="Save" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Save"
+
+[node name="Export" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Export"
+
+[connection signal="pressed" from="Buttons/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Buttons/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Buttons/Export" to="." method="_on_export_pressed"]
