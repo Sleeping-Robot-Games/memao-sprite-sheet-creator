@@ -2,6 +2,18 @@ extends NinePatchRect
 
 @onready var screen = get_parent()
 
+func _ready():
+	if screen and screen.name:
+		match screen.name:
+			'Desktop':
+				for btn in $Buttons.get_children():
+					btn.hide()
+			'SpriteCreate':
+				pass
+			'SavedSprites':
+				$Buttons/Save.hide()
+				$Buttons/Export.hide()
+
 func _on_back_pressed() -> void:
 	if screen and screen.name:
 		match screen.name:
