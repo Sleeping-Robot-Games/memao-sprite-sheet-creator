@@ -1,20 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgpa540vv560k"]
+[gd_scene load_steps=9 format=3 uid="uid://bgpa540vv560k"]
 
 [ext_resource type="Script" uid="uid://dcw2vi1hcypja" path="res://SpriteCreate/sprite_create.gd" id="1_5ealw"]
 [ext_resource type="Texture2D" uid="uid://dgef8c7ared1j" path="res://Assets/Ui/BGs/Bg_002.png" id="1_ls05x"]
 [ext_resource type="PackedScene" uid="uid://dx6pcfu1ca8vo" path="res://Shared/task_bar.tscn" id="2_yrjhp"]
 [ext_resource type="PackedScene" uid="uid://bxc4l6ko7ylhh" path="res://character_sprites/character_sprites.tscn" id="3_3w578"]
-[ext_resource type="Texture2D" uid="uid://cfpjq3j6syoxi" path="res://Assets/Character/16x32/Eyes/eyes_001.png" id="5_iwywa"]
 [ext_resource type="Texture2D" uid="uid://btmwsophk7wnd" path="res://Assets/Ui/dicenormal.png" id="6_ibenw"]
+[ext_resource type="PackedScene" uid="uid://ictyebcbg70b" path="res://SavedSprites/sprite_selection_section.tscn" id="6_iwywa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_updko"]
 bg_color = Color(0.321728, 0.321728, 0.321728, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xua5y"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwywa"]
-atlas = ExtResource("5_iwywa")
-region = Rect2(15, 9, 18, 18)
 
 [node name="SpriteCreate" type="Node2D"]
 script = ExtResource("1_5ealw")
@@ -35,6 +31,7 @@ offset_left = 297.0
 offset_top = 56.0
 offset_right = 747.0
 offset_bottom = 436.0
+horizontal_scroll_mode = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer"]
 custom_minimum_size = Vector2(450, 380)
@@ -44,232 +41,117 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_updko")
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Header" type="PanelContainer" parent="ScrollContainer/PanelContainer/VBoxContainer"]
+[node name="CharacterHeader" type="PanelContainer" parent="ScrollContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xua5y")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/Header"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/CharacterHeader"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScrollContainer/PanelContainer/VBoxContainer/Header/HBoxContainer"]
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer/VBoxContainer/CharacterHeader/HBoxContainer"]
 layout_mode = 2
 text = "Character"
 
-[node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/Header/HBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/CharacterHeader/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("6_ibenw")
 stretch_mode = 3
 
-[node name="Section2" type="VBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer"]
+[node name="Section" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2"]
-custom_minimum_size = Vector2(0, 48)
+[node name="HeadHeader" type="PanelContainer" parent="ScrollContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xua5y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/HeadHeader"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/Header"]
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer/VBoxContainer/HeadHeader/HBoxContainer"]
 layout_mode = 2
-text = "Skin Tone"
+text = "Head"
 
-[node name="TextureButton" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/Header"]
+[node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/HeadHeader/HBoxContainer"]
 layout_mode = 2
-text = "expand"
+texture_normal = ExtResource("6_ibenw")
+stretch_mode = 3
 
-[node name="TextureButton2" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/Header"]
+[node name="Section3" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
-text = "lock"
+part = "AccessoryA"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2"]
-visible = false
+[node name="Section2" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
-follow_focus = true
-vertical_scroll_mode = 0
+part = "AccessoryB"
 
-[node name="Selections" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer"]
+[node name="Section4" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
+part = "HairA"
 
-[node name="Button" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
+[node name="Section5" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
-flat = true
+part = "HairB"
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections/Button"]
+[node name="Section6" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
+part = "HairC"
 
-[node name="Button2" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
+[node name="TopHeader" type="PanelContainer" parent="ScrollContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-flat = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_xua5y")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections/Button2"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button3" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections/Button3"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button4" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections/Button4"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button5" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections/Button5"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button6" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section2/ScrollContainer/Selections/Button6"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Section" type="VBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/TopHeader"]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/Section"]
-custom_minimum_size = Vector2(0, 48)
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer/VBoxContainer/TopHeader/HBoxContainer"]
+layout_mode = 2
+text = "Top"
+
+[node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/TopHeader/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_ibenw")
+stretch_mode = 3
+
+[node name="Section7" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
+layout_mode = 2
+part = "AccessoryC"
+
+[node name="Section8" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
+layout_mode = 2
+part = "TopA"
+
+[node name="Section9" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
+layout_mode = 2
+part = "JacketA"
+
+[node name="Section10" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
+layout_mode = 2
+part = "JacketB"
+
+[node name="BottomHeader" type="PanelContainer" parent="ScrollContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xua5y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/BottomHeader"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/Header"]
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer/VBoxContainer/BottomHeader/HBoxContainer"]
 layout_mode = 2
-text = "Eyes"
+text = "Top"
 
-[node name="TextureButton" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/Header"]
+[node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/BottomHeader/HBoxContainer"]
 layout_mode = 2
-text = "expand"
+texture_normal = ExtResource("6_ibenw")
+stretch_mode = 3
 
-[node name="TextureButton2" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/Header"]
+[node name="Section11" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
-text = "lock"
+part = "BottomA"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/Section"]
+[node name="Section12" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
-follow_focus = true
-vertical_scroll_mode = 0
+part = "BottomB"
 
-[node name="Selections" type="HBoxContainer" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer"]
+[node name="Section13" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
-
-[node name="Button" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections/Button"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button2" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections/Button2"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button3" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections/Button3"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button4" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections/Button4"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button5" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections/Button5"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[node name="Button6" type="Button" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/PanelContainer/VBoxContainer/Section/ScrollContainer/Selections/Button6"]
-layout_mode = 2
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 49.0
-offset_bottom = 49.0
-texture = SubResource("AtlasTexture_iwywa")
-
-[connection signal="pressed" from="ScrollContainer/PanelContainer/VBoxContainer/Section2/Header/TextureButton" to="." method="_on_texture_button_pressed"]
-[connection signal="pressed" from="ScrollContainer/PanelContainer/VBoxContainer/Section/Header/TextureButton" to="." method="_on_texture_button_pressed"]
+part = "Shoes"

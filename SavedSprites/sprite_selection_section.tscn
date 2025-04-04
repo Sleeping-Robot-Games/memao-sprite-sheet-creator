@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://ictyebcbg70b"]
+
+[ext_resource type="Script" uid="uid://eyn4jvi1wxpf" path="res://SavedSprites/sprite_selection_section.gd" id="1_mht72"]
+
+[node name="Section" type="VBoxContainer"]
+script = ExtResource("1_mht72")
+part = "Eyes"
+
+[node name="Header" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Header"]
+layout_mode = 2
+text = "Eyes"
+
+[node name="Expand" type="Button" parent="Header"]
+layout_mode = 2
+text = "expand"
+
+[node name="Lock" type="Button" parent="Header"]
+layout_mode = 2
+text = "lock"
+
+[node name="Selections" type="HFlowContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="Header/Expand" to="." method="_on_expand_pressed"]
