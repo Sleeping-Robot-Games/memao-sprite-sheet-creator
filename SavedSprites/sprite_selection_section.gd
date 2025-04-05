@@ -24,6 +24,7 @@ func populate_sprite_selection_buttons():
 			new_sprite_selection_button.set_sprite(part, file_path)
 			$Selections.add_child(new_sprite_selection_button)
 
-func _on_gui_input(event: InputEvent) -> void:
+
+func _on_header_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		$Selections.visible = !$Selections.visible

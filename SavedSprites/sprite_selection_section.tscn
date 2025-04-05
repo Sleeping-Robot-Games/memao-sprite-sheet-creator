@@ -21,4 +21,4 @@ text = "lock"
 [node name="Selections" type="HFlowContainer" parent="."]
 layout_mode = 2
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="gui_input" from="Header" to="." method="_on_header_gui_input"]
