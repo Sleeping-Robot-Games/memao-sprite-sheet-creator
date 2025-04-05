@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://bucmckawi02sh"]
 
-[ext_resource type="Texture2D" uid="uid://cfpjq3j6syoxi" path="res://Assets/Character/16x32/Eyes/eyes_001.png" id="1_l153c"]
 [ext_resource type="Script" uid="uid://p48qroey01kd" path="res://SavedSprites/sprite_selection_button.gd" id="1_sbods"]
+[ext_resource type="Texture2D" uid="uid://whfgo7a2iq2g" path="res://Assets/Character/16x32/HairB/hairb_004.png" id="2_sbods"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sbods"]
 bg_color = Color(0.820373, 0.859954, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iwywa"]
-atlas = ExtResource("1_l153c")
-region = Rect2(15, 9, 18, 18)
+atlas = ExtResource("2_sbods")
+region = Rect2(8, 3, 32, 32)
 
 [node name="SpriteSelectionButton" type="Button"]
 custom_minimum_size = Vector2(50, 50)
@@ -22,3 +22,5 @@ offset_top = 1.0
 offset_right = 49.0
 offset_bottom = 49.0
 texture = SubResource("AtlasTexture_iwywa")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

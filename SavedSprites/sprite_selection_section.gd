@@ -1,4 +1,3 @@
-@tool
 extends VBoxContainer
 
 @export var part: String = ""
@@ -18,10 +17,13 @@ func populate_sprite_selection_buttons():
 	if part:
 		var folder_path = "res://Assets/Character/16x32/"+part
 		for sprite in g.files_in_dir(folder_path):
+			if '000' in sprite:
+				continue
 			var new_sprite_selection_button = sprite_selection_button_scene.instantiate()
 			var file_path = folder_path + "/" + sprite
 			new_sprite_selection_button.set_sprite(part, file_path)
 			$Selections.add_child(new_sprite_selection_button)
 
-func _on_expand_pressed() -> void:
-	$Selections.visible = !$Selections.visible
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		$Selections.visible = !$Selections.visible

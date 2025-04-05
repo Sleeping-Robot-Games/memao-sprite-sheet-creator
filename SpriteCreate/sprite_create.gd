@@ -222,16 +222,13 @@ func ensure_hair(sprite_name):
 func get_sprite_number_from_name(sprite_name):
 	return sprite_state[sprite_name].substr(len(sprite_state[sprite_name]) - 7, 3)
 
-func _on_Random_button_up():
-	create_random_character()
-
 func _on_Turn_button_up(direction):
 	var animations = ['idle_front', 'idle_right', 'idle_back', 'idle_left']
 	current_animation += direction
 	if current_animation == 4 or current_animation == -4:
 		current_animation = 0
 	$CharacterSprites/AnimationPlayer.play(animations[current_animation])
-	
+
 func _on_Sprite_Selection_button_up(direction: int, sprite: String):
 	var folder_path = sprite_folder_path+sprite+"/"
 	var files = g.files_in_dir(folder_path)
@@ -297,5 +294,5 @@ func export_sheet():
 	s_g.export_spritesheet()
 
 
-func _on_texture_button_pressed() -> void:
-	pass
+func _on_random_all_pressed() -> void:
+	create_random_character()

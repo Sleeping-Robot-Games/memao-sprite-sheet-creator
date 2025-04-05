@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://bxc4l6ko7ylhh"]
+[gd_scene load_steps=36 format=3 uid="uid://bxc4l6ko7ylhh"]
 
 [ext_resource type="Script" uid="uid://ckdtxs12w3adq" path="res://character_sprites/character_sprites.gd" id="1_jm7ug"]
-[ext_resource type="Shader" uid="uid://dcm0vkx1arym5" path="res://character_sprites/palette_swap.gdshader" id="1_tll5h"]
 [ext_resource type="Texture2D" uid="uid://b3o3rv0ohwikm" path="res://Assets/Character/16x32/AccessoryA/accessorya_000.png" id="2_jm7ug"]
 [ext_resource type="Texture2D" uid="uid://c62pwwrsp7xfs" path="res://Assets/Character/16x32/AccessoryB/accessoryb_000.png" id="3_rb4ib"]
 [ext_resource type="Texture2D" uid="uid://bam8wdmkxs4xw" path="res://Assets/Character/16x32/AccessoryC/accessoryc_000.png" id="4_e3hl8"]
@@ -9,7 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bi61237t8joln" path="res://Assets/Character/16x32/Body/body.png" id="6_qp411"]
 [ext_resource type="Texture2D" uid="uid://caifl28e88uj3" path="res://Assets/Character/16x32/BottomA/bottoma_001.png" id="7_pnu84"]
 [ext_resource type="Texture2D" uid="uid://djr3k2cf1t50c" path="res://Assets/Character/16x32/BottomB/bottomb_000.png" id="8_mbi0t"]
-[ext_resource type="Texture2D" uid="uid://cfpjq3j6syoxi" path="res://Assets/Character/16x32/Eyes/eyes_001.png" id="9_fe2mq"]
+[ext_resource type="Texture2D" uid="uid://dgesd16jxwle0" path="res://Assets/Palettes/Eye/palette.png" id="9_jm7ug"]
+[ext_resource type="Texture2D" uid="uid://bjgvs3q3b64st" path="res://Assets/Character/16x32/Eyes/eyes_003.png" id="10_rb4ib"]
 [ext_resource type="Texture2D" uid="uid://c1c0gu7upvg6f" path="res://Assets/Character/16x32/HairA/haira_001.png" id="10_sca4p"]
 [ext_resource type="Texture2D" uid="uid://w1ohodsdtg0g" path="res://Assets/Character/16x32/HairB/hairb_000.png" id="11_8tfn3"]
 [ext_resource type="Texture2D" uid="uid://cgw6mmmocdvx0" path="res://Assets/Character/16x32/HairC/hairc_000.png" id="12_rcyqq"]
@@ -25,8 +25,45 @@
 [ext_resource type="Animation" path="res://character_sprites/idle_right.tres" id="22_7nmmt"]
 [ext_resource type="Animation" path="res://character_sprites/idle_front.tres" id="23_23jt7"]
 
+[sub_resource type="Shader" id="Shader_e3hl8"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D palette : source_color;
+
+uniform int total_rows = 4;
+uniform int total_columns = 4;
+uniform int color_row = 1;
+uniform vec4 parent_modulation = vec4(1.0, 1.0, 1.0, 1.0);
+
+void fragment() {
+    vec4 old_color = texture(TEXTURE, UV);
+    vec4 final_color = old_color;
+
+    // Only remap colors that are true grayscale (r ≈ g ≈ b)
+    if (abs(old_color.r - old_color.g) < 0.01 && abs(old_color.g - old_color.b) < 0.01) {
+        float col_index = floor(old_color.r * float(total_columns));
+        float x_coord = (col_index + 0.5) / float(total_columns);
+
+        float y_grayscale = (0.0 + 0.5) / float(total_rows);
+        vec4 gray_sample = texture(palette, vec2(x_coord, y_grayscale));
+
+        float y_color = (float(color_row) + 0.5) / float(total_rows);
+        vec4 color_sample = texture(palette, vec2(x_coord, y_color));
+
+        // Only swap if it closely matches a known grayscale color
+        if (distance(old_color.rgb, gray_sample.rgb) < 0.05) {
+            color_sample.a *= old_color.a;
+            final_color = color_sample;
+        }
+    }
+
+    COLOR = final_color * parent_modulation;
+}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f1tla"]
-shader = ExtResource("1_tll5h")
+shader = SubResource("Shader_e3hl8")
 shader_parameter/total_rows = 9
 shader_parameter/total_columns = 4
 shader_parameter/color_row = 3
@@ -72,6 +109,51 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p3fdf"]
 shader = SubResource("Shader_l14hk")
 shader_parameter/total_rows = 9
+shader_parameter/total_columns = 4
+shader_parameter/color_row = 3
+shader_parameter/parent_modulation = Vector4(1, 1, 1, 1)
+
+[sub_resource type="Shader" id="Shader_1yaik"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D palette : source_color;
+
+uniform int total_rows = 4;
+uniform int total_columns = 4;
+uniform int color_row = 1;
+uniform vec4 parent_modulation = vec4(1.0, 1.0, 1.0, 1.0);
+
+void fragment() {
+    vec4 old_color = texture(TEXTURE, UV);
+    vec4 final_color = old_color;
+
+    // Only remap colors that are true grayscale (r ≈ g ≈ b)
+    if (abs(old_color.r - old_color.g) < 0.01 && abs(old_color.g - old_color.b) < 0.01) {
+        float col_index = floor(old_color.r * float(total_columns));
+        float x_coord = (col_index + 0.5) / float(total_columns);
+
+        float y_grayscale = (0.0 + 0.5) / float(total_rows);
+        vec4 gray_sample = texture(palette, vec2(x_coord, y_grayscale));
+
+        float y_color = (float(color_row) + 0.5) / float(total_rows);
+        vec4 color_sample = texture(palette, vec2(x_coord, y_color));
+
+        // Only swap if it closely matches a known grayscale color
+        if (distance(old_color.rgb, gray_sample.rgb) < 0.05) {
+            color_sample.a *= old_color.a;
+            final_color = color_sample;
+        }
+    }
+
+    COLOR = final_color * parent_modulation;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qp411"]
+shader = SubResource("Shader_1yaik")
+shader_parameter/palette = ExtResource("9_jm7ug")
+shader_parameter/total_rows = 29
 shader_parameter/total_columns = 4
 shader_parameter/color_row = 3
 shader_parameter/parent_modulation = Vector4(1, 1, 1, 1)
@@ -1025,8 +1107,9 @@ vframes = 8
 frame = 2
 
 [node name="Eyes" type="Sprite2D" parent="SpriteHolder"]
-material = SubResource("ShaderMaterial_f1tla")
-texture = ExtResource("9_fe2mq")
+z_index = 2
+material = SubResource("ShaderMaterial_qp411")
+texture = ExtResource("10_rb4ib")
 hframes = 8
 vframes = 8
 frame = 2

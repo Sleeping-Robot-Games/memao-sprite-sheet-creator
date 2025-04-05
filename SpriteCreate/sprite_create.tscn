@@ -1,11 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgpa540vv560k"]
+[gd_scene load_steps=14 format=3 uid="uid://bgpa540vv560k"]
 
 [ext_resource type="Script" uid="uid://dcw2vi1hcypja" path="res://SpriteCreate/sprite_create.gd" id="1_5ealw"]
 [ext_resource type="Texture2D" uid="uid://dgef8c7ared1j" path="res://Assets/Ui/BGs/Bg_002.png" id="1_ls05x"]
 [ext_resource type="PackedScene" uid="uid://dx6pcfu1ca8vo" path="res://Shared/task_bar.tscn" id="2_yrjhp"]
 [ext_resource type="PackedScene" uid="uid://bxc4l6ko7ylhh" path="res://character_sprites/character_sprites.tscn" id="3_3w578"]
+[ext_resource type="Texture2D" uid="uid://c8ho8txb4ns1l" path="res://Assets/Ui/diceallnormal.png" id="5_5nlvk"]
 [ext_resource type="Texture2D" uid="uid://btmwsophk7wnd" path="res://Assets/Ui/dicenormal.png" id="6_ibenw"]
 [ext_resource type="PackedScene" uid="uid://ictyebcbg70b" path="res://SavedSprites/sprite_selection_section.tscn" id="6_iwywa"]
+[ext_resource type="Texture2D" uid="uid://bx4n405n0s5st" path="res://Assets/Ui/diceallpressed.png" id="6_yjyj0"]
+[ext_resource type="Texture2D" uid="uid://b2unle2jjkqa3" path="res://Assets/Ui/diceallhover.png" id="7_ivv6o"]
+[ext_resource type="Texture2D" uid="uid://dhh46y2jd8ogg" path="res://Assets/Ui/dicealldisabled.png" id="8_7i26d"]
+[ext_resource type="Texture2D" uid="uid://4kc8i2ayypog" path="res://Assets/Ui/diceallfocus.png" id="9_l20ww"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_updko"]
 bg_color = Color(0.321728, 0.321728, 0.321728, 1)
@@ -23,8 +28,20 @@ texture = ExtResource("1_ls05x")
 [node name="TaskBar" parent="." instance=ExtResource("2_yrjhp")]
 
 [node name="CharacterSprites" parent="." instance=ExtResource("3_3w578")]
-position = Vector2(149, 189)
+position = Vector2(149, 170)
 scale = Vector2(6, 6)
+
+[node name="RandomAll" type="TextureButton" parent="."]
+offset_left = 22.0
+offset_top = 223.0
+offset_right = 62.0
+offset_bottom = 263.0
+texture_normal = ExtResource("5_5nlvk")
+texture_pressed = ExtResource("6_yjyj0")
+texture_hover = ExtResource("7_ivv6o")
+texture_disabled = ExtResource("8_7i26d")
+texture_focused = ExtResource("9_l20ww")
+stretch_mode = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 297.0
@@ -53,9 +70,10 @@ layout_mode = 2
 text = "Character"
 
 [node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/CharacterHeader/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 texture_normal = ExtResource("6_ibenw")
-stretch_mode = 3
+stretch_mode = 0
 
 [node name="Section" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
@@ -72,9 +90,10 @@ layout_mode = 2
 text = "Head"
 
 [node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/HeadHeader/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 texture_normal = ExtResource("6_ibenw")
-stretch_mode = 3
+stretch_mode = 0
 
 [node name="Section3" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
@@ -108,9 +127,10 @@ layout_mode = 2
 text = "Top"
 
 [node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/TopHeader/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 texture_normal = ExtResource("6_ibenw")
-stretch_mode = 3
+stretch_mode = 0
 
 [node name="Section7" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
@@ -140,9 +160,10 @@ layout_mode = 2
 text = "Top"
 
 [node name="TextureButton" type="TextureButton" parent="ScrollContainer/PanelContainer/VBoxContainer/BottomHeader/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 texture_normal = ExtResource("6_ibenw")
-stretch_mode = 3
+stretch_mode = 0
 
 [node name="Section11" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
@@ -155,3 +176,5 @@ part = "BottomB"
 [node name="Section13" parent="ScrollContainer/PanelContainer/VBoxContainer" instance=ExtResource("6_iwywa")]
 layout_mode = 2
 part = "Shoes"
+
+[connection signal="pressed" from="RandomAll" to="." method="_on_random_all_pressed"]
